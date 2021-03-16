@@ -1,0 +1,69 @@
+<html>
+	<div id="generateTableForm">
+		<font size="8" color="green">Final test lab</font><br><br>
+		Number of rows: <input type="number" id="t1" /><br><br>
+		Number of cols: <input type="number" id="t2" /><br><br>
+		
+		<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+	</div>
+	
+	<button id="b2" onclick="addColumn()">Add Column</button>
+	
+	<button id="b3" onclick="addRow()">Add Row</button>
+
+	<div style="margin-top: 10px" id="myDynamicTable"></div>
+		
+	<script language="javascript">
+
+		var myTableDiv = document.getElementById("myDynamicTable");
+		var t1 = 0;
+		var t2 = 0;
+
+		function generateTable() {
+			t1 = document.getElementById("t1").value;
+			t2 = document.getElementById("t2").value;
+			
+			createTable(t1, t2) 
+
+			var form = document.getElementById("generateTableForm");
+			form.style.display = "none";
+		}
+		
+		function addColumn() {
+			t2++;
+			createTable(t1, t2);
+		}
+
+		function addRow() {
+			t1++;
+			createTable(t1, t2);
+		}
+
+		function createTable(t1, t2) {
+			if (t1 > 0 && t2 > 0) {
+				var table = document.createElement('TABLE');
+				table.border = '1';
+
+				var tableBody = document.createElement('TBODY');
+				table.appendChild(tableBody);
+				
+				for (var i = 0; i < t1; i++) {
+					var tr = document.createElement('TR');
+					tableBody.appendChild(tr);
+
+					for (var j = 0; j < t2; j++) {
+						var td = document.createElement('TD');
+						td.width = '75';
+						td.appendChild(document.createTextNode("Cell " + i + "," + j));
+						tr.appendChild(td);
+					}
+				}
+
+				myTableDiv.innerHTML = "";
+				myTableDiv.append(table);
+			}
+		}
+	
+	</script>
+	
+</html>
